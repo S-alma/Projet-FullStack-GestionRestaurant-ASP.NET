@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_Gestion_restaurantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="COMMENTAIRE">
+          <Key>
+            <PropertyRef Name="Id_commentaire" />
+          </Key>
+          <Property Name="Id_commentaire" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type_commentaire" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Date_commentaire" Type="datetime" Nullable="false" />
+          <Property Name="Commentaire" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Id_utilisateur" Type="int" Nullable="false" />
+          <Property Name="Id_restaurant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RESERVATION">
+          <Key>
+            <PropertyRef Name="Id_reservation" />
+          </Key>
+          <Property Name="Id_reservation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_reservation" Type="datetime" Nullable="false" />
+          <Property Name="Id_utilisateur" Type="int" Nullable="false" />
+          <Property Name="Id_table" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RESTAURANT">
+          <Key>
+            <PropertyRef Name="Id_restaurant" />
+          </Key>
+          <Property Name="Id_restaurant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_restaurant" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Adresse_restaurant" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_etoile" Type="int" Nullable="false" />
+          <Property Name="Nombre_table" Type="int" Nullable="false" />
+          <Property Name="Id_utilisateur" Type="int" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" />
+          <Property Name="Image_restaurant" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TABLE_RESTAURANT">
+          <Key>
+            <PropertyRef Name="Id_table" />
+          </Key>
+          <Property Name="Id_table" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Disponibilite" Type="bit" />
+          <Property Name="Nombre_personne" Type="int" Nullable="false" />
+          <Property Name="Id_restaurant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UTILISATEUR">
+          <Key>
+            <PropertyRef Name="Id_utilisateur" />
+          </Key>
+          <Property Name="Id_utilisateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom_utilisateur" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Prenom_utilisateur" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Adresse_mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mot_de_passe" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type_utilisateur" Type="bit" />
+        </EntityType>
+        <Association Name="fk_ct_Idr">
+          <End Role="RESTAURANT" Type="Self.RESTAURANT" Multiplicity="1" />
+          <End Role="COMMENTAIRE" Type="Self.COMMENTAIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANT">
+              <PropertyRef Name="Id_restaurant" />
+            </Principal>
+            <Dependent Role="COMMENTAIRE">
+              <PropertyRef Name="Id_restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ct_Idu">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1" />
+          <End Role="COMMENTAIRE" Type="Self.COMMENTAIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="Id_utilisateur" />
+            </Principal>
+            <Dependent Role="COMMENTAIRE">
+              <PropertyRef Name="Id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rs_Idt">
+          <End Role="TABLE_RESTAURANT" Type="Self.TABLE_RESTAURANT" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABLE_RESTAURANT">
+              <PropertyRef Name="Id_table" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="Id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rs_Idu">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="Id_utilisateur" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="Id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rt_Idr">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1" />
+          <End Role="RESTAURANT" Type="Self.RESTAURANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="Id_utilisateur" />
+            </Principal>
+            <Dependent Role="RESTAURANT">
+              <PropertyRef Name="Id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tm_Idre">
+          <End Role="RESTAURANT" Type="Self.RESTAURANT" Multiplicity="1" />
+          <End Role="TABLE_RESTAURANT" Type="Self.TABLE_RESTAURANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANT">
+              <PropertyRef Name="Id_restaurant" />
+            </Principal>
+            <Dependent Role="TABLE_RESTAURANT">
+              <PropertyRef Name="Id_restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_Gestion_restaurantModelStoreContainer">
+          <EntitySet Name="COMMENTAIRE" EntityType="Self.COMMENTAIRE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESERVATION" EntityType="Self.RESERVATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESTAURANT" EntityType="Self.RESTAURANT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABLE_RESTAURANT" EntityType="Self.TABLE_RESTAURANT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UTILISATEUR" EntityType="Self.UTILISATEUR" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_ct_Idr" Association="Self.fk_ct_Idr">
+            <End Role="RESTAURANT" EntitySet="RESTAURANT" />
+            <End Role="COMMENTAIRE" EntitySet="COMMENTAIRE" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ct_Idu" Association="Self.fk_ct_Idu">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="COMMENTAIRE" EntitySet="COMMENTAIRE" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rs_Idt" Association="Self.fk_rs_Idt">
+            <End Role="TABLE_RESTAURANT" EntitySet="TABLE_RESTAURANT" />
+            <End Role="RESERVATION" EntitySet="RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rs_Idu" Association="Self.fk_rs_Idu">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="RESERVATION" EntitySet="RESERVATION" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rt_Idr" Association="Self.fk_rt_Idr">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEUR" />
+            <End Role="RESTAURANT" EntitySet="RESTAURANT" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tm_Idre" Association="Self.fk_tm_Idre">
+            <End Role="RESTAURANT" EntitySet="RESTAURANT" />
+            <End Role="TABLE_RESTAURANT" EntitySet="TABLE_RESTAURANT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_Gestion_restaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="COMMENTAIRE">
+          <Key>
+            <PropertyRef Name="Id_commentaire" />
+          </Key>
+          <Property Name="Id_commentaire" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_commentaire" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_commentaire" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Commentaire1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_utilisateur" Type="Int32" Nullable="false" />
+          <Property Name="Id_restaurant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RESTAURANT" Relationship="Self.fk_ct_Idr" FromRole="COMMENTAIRE" ToRole="RESTAURANT" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="Self.fk_ct_Idu" FromRole="COMMENTAIRE" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="RESERVATION">
+          <Key>
+            <PropertyRef Name="Id_reservation" />
+          </Key>
+          <Property Name="Id_reservation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_reservation" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id_utilisateur" Type="Int32" Nullable="false" />
+          <Property Name="Id_table" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TABLE_RESTAURANT" Relationship="Self.fk_rs_Idt" FromRole="RESERVATION" ToRole="TABLE_RESTAURANT" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="Self.fk_rs_Idu" FromRole="RESERVATION" ToRole="UTILISATEUR" />
+        </EntityType>
+        <EntityType Name="RESTAURANT">
+          <Key>
+            <PropertyRef Name="Id_restaurant" />
+          </Key>
+          <Property Name="Id_restaurant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_restaurant" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse_restaurant" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_etoile" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_table" Type="Int32" Nullable="false" />
+          <Property Name="Id_utilisateur" Type="Int32" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Image_restaurant" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="COMMENTAIREs" Relationship="Self.fk_ct_Idr" FromRole="RESTAURANT" ToRole="COMMENTAIRE" />
+          <NavigationProperty Name="UTILISATEUR" Relationship="Self.fk_rt_Idr" FromRole="RESTAURANT" ToRole="UTILISATEUR" />
+          <NavigationProperty Name="TABLE_RESTAURANT" Relationship="Self.fk_tm_Idre" FromRole="RESTAURANT" ToRole="TABLE_RESTAURANT" />
+        </EntityType>
+        <EntityType Name="TABLE_RESTAURANT">
+          <Key>
+            <PropertyRef Name="Id_table" />
+          </Key>
+          <Property Name="Id_table" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Disponibilite" Type="Boolean" />
+          <Property Name="Nombre_personne" Type="Int32" Nullable="false" />
+          <Property Name="Id_restaurant" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="Self.fk_rs_Idt" FromRole="TABLE_RESTAURANT" ToRole="RESERVATION" />
+          <NavigationProperty Name="RESTAURANT" Relationship="Self.fk_tm_Idre" FromRole="TABLE_RESTAURANT" ToRole="RESTAURANT" />
+        </EntityType>
+        <EntityType Name="UTILISATEUR">
+          <Key>
+            <PropertyRef Name="Id_utilisateur" />
+          </Key>
+          <Property Name="Id_utilisateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom_utilisateur" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom_utilisateur" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Adresse_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mot_de_passe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type_utilisateur" Type="Boolean" />
+          <NavigationProperty Name="COMMENTAIREs" Relationship="Self.fk_ct_Idu" FromRole="UTILISATEUR" ToRole="COMMENTAIRE" />
+          <NavigationProperty Name="RESERVATIONs" Relationship="Self.fk_rs_Idu" FromRole="UTILISATEUR" ToRole="RESERVATION" />
+          <NavigationProperty Name="RESTAURANTs" Relationship="Self.fk_rt_Idr" FromRole="UTILISATEUR" ToRole="RESTAURANT" />
+        </EntityType>
+        <Association Name="fk_ct_Idr">
+          <End Role="RESTAURANT" Type="Self.RESTAURANT" Multiplicity="1" />
+          <End Role="COMMENTAIRE" Type="Self.COMMENTAIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANT">
+              <PropertyRef Name="Id_restaurant" />
+            </Principal>
+            <Dependent Role="COMMENTAIRE">
+              <PropertyRef Name="Id_restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ct_Idu">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1" />
+          <End Role="COMMENTAIRE" Type="Self.COMMENTAIRE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="Id_utilisateur" />
+            </Principal>
+            <Dependent Role="COMMENTAIRE">
+              <PropertyRef Name="Id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rs_Idt">
+          <End Role="TABLE_RESTAURANT" Type="Self.TABLE_RESTAURANT" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABLE_RESTAURANT">
+              <PropertyRef Name="Id_table" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="Id_table" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rs_Idu">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1" />
+          <End Role="RESERVATION" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="Id_utilisateur" />
+            </Principal>
+            <Dependent Role="RESERVATION">
+              <PropertyRef Name="Id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rt_Idr">
+          <End Role="UTILISATEUR" Type="Self.UTILISATEUR" Multiplicity="1" />
+          <End Role="RESTAURANT" Type="Self.RESTAURANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UTILISATEUR">
+              <PropertyRef Name="Id_utilisateur" />
+            </Principal>
+            <Dependent Role="RESTAURANT">
+              <PropertyRef Name="Id_utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_tm_Idre">
+          <End Role="RESTAURANT" Type="Self.RESTAURANT" Multiplicity="1" />
+          <End Role="TABLE_RESTAURANT" Type="Self.TABLE_RESTAURANT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESTAURANT">
+              <PropertyRef Name="Id_restaurant" />
+            </Principal>
+            <Dependent Role="TABLE_RESTAURANT">
+              <PropertyRef Name="Id_restaurant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BD_Gestion_restaurantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="COMMENTAIREs" EntityType="Self.COMMENTAIRE" />
+          <EntitySet Name="RESERVATIONs" EntityType="Self.RESERVATION" />
+          <EntitySet Name="RESTAURANTs" EntityType="Self.RESTAURANT" />
+          <EntitySet Name="TABLE_RESTAURANT" EntityType="Self.TABLE_RESTAURANT" />
+          <EntitySet Name="UTILISATEURs" EntityType="Self.UTILISATEUR" />
+          <AssociationSet Name="fk_ct_Idr" Association="Self.fk_ct_Idr">
+            <End Role="RESTAURANT" EntitySet="RESTAURANTs" />
+            <End Role="COMMENTAIRE" EntitySet="COMMENTAIREs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ct_Idu" Association="Self.fk_ct_Idu">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEURs" />
+            <End Role="COMMENTAIRE" EntitySet="COMMENTAIREs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rs_Idt" Association="Self.fk_rs_Idt">
+            <End Role="TABLE_RESTAURANT" EntitySet="TABLE_RESTAURANT" />
+            <End Role="RESERVATION" EntitySet="RESERVATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rs_Idu" Association="Self.fk_rs_Idu">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEURs" />
+            <End Role="RESERVATION" EntitySet="RESERVATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rt_Idr" Association="Self.fk_rt_Idr">
+            <End Role="UTILISATEUR" EntitySet="UTILISATEURs" />
+            <End Role="RESTAURANT" EntitySet="RESTAURANTs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_tm_Idre" Association="Self.fk_tm_Idre">
+            <End Role="RESTAURANT" EntitySet="RESTAURANTs" />
+            <End Role="TABLE_RESTAURANT" EntitySet="TABLE_RESTAURANT" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_Gestion_restaurantModelStoreContainer" CdmEntityContainer="BD_Gestion_restaurantEntities">
+          <EntitySetMapping Name="COMMENTAIREs">
+            <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.COMMENTAIRE">
+              <MappingFragment StoreEntitySet="COMMENTAIRE">
+                <ScalarProperty Name="Id_commentaire" ColumnName="Id_commentaire" />
+                <ScalarProperty Name="Type_commentaire" ColumnName="Type_commentaire" />
+                <ScalarProperty Name="Date_commentaire" ColumnName="Date_commentaire" />
+                <ScalarProperty Name="Commentaire1" ColumnName="Commentaire" />
+                <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+                <ScalarProperty Name="Id_restaurant" ColumnName="Id_restaurant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVATIONs">
+            <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.RESERVATION">
+              <MappingFragment StoreEntitySet="RESERVATION">
+                <ScalarProperty Name="Id_reservation" ColumnName="Id_reservation" />
+                <ScalarProperty Name="Date_reservation" ColumnName="Date_reservation" />
+                <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+                <ScalarProperty Name="Id_table" ColumnName="Id_table" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESTAURANTs">
+            <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.RESTAURANT">
+              <MappingFragment StoreEntitySet="RESTAURANT">
+                <ScalarProperty Name="Id_restaurant" ColumnName="Id_restaurant" />
+                <ScalarProperty Name="Nom_restaurant" ColumnName="Nom_restaurant" />
+                <ScalarProperty Name="Adresse_restaurant" ColumnName="Adresse_restaurant" />
+                <ScalarProperty Name="Nombre_etoile" ColumnName="Nombre_etoile" />
+                <ScalarProperty Name="Nombre_table" ColumnName="Nombre_table" />
+                <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Image_restaurant" ColumnName="Image_restaurant" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABLE_RESTAURANT">
+            <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.TABLE_RESTAURANT">
+              <MappingFragment StoreEntitySet="TABLE_RESTAURANT">
+                <ScalarProperty Name="Id_table" ColumnName="Id_table" />
+                <ScalarProperty Name="Disponibilite" ColumnName="Disponibilite" />
+                <ScalarProperty Name="Nombre_personne" ColumnName="Nombre_personne" />
+                <ScalarProperty Name="Id_restaurant" ColumnName="Id_restaurant" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UTILISATEURs">
+            <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.UTILISATEUR">
+              <MappingFragment StoreEntitySet="UTILISATEUR">
+                <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+                <ScalarProperty Name="Nom_utilisateur" ColumnName="Nom_utilisateur" />
+                <ScalarProperty Name="Prenom_utilisateur" ColumnName="Prenom_utilisateur" />
+                <ScalarProperty Name="Adresse_mail" ColumnName="Adresse_mail" />
+                <ScalarProperty Name="Mot_de_passe" ColumnName="Mot_de_passe" />
+                <ScalarProperty Name="Type_utilisateur" ColumnName="Type_utilisateur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

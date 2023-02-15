@@ -1,0 +1,48 @@
+﻿@model GestionRestaurant.Models.RESERVATION
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>RESERVATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_reservation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_reservation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABLE_RESTAURANT.Id_table)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABLE_RESTAURANT.Id_table)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UTILISATEUR.Nom_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UTILISATEUR.Nom_utilisateur)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

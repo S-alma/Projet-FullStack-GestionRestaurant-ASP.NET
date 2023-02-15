@@ -1,0 +1,57 @@
+﻿@model IEnumerable<GestionRestaurant.Models.COMMENTAIRE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Type_commentaire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_commentaire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Commentaire1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RESTAURANT.Nom_restaurant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UTILISATEUR.Nom_utilisateur)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type_commentaire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_commentaire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commentaire1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RESTAURANT.Nom_restaurant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UTILISATEUR.Nom_utilisateur)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_commentaire }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_commentaire }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_commentaire })
+        </td>
+    </tr>
+}
+
+</table>

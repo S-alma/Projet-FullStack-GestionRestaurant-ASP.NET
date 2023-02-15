@@ -1,0 +1,80 @@
+﻿@model IEnumerable<GestionRestaurant.Models.RESTAURANT>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="text-center" style="padding: 120px 0;">
+    <div style="padding: 60px 0;">
+        <img class="img-fluid, center-block" width="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqWe3RocY-iBAn7PceMGg7uOVpyWwKpVrziA&usqp=CAU">
+        <div style="padding: 60px 0;">
+            <h4>Si vous souhaitez vous faire plaisir et profiter d'un moment chaleureux entre familles ou amis. </h4>
+            <h4>Le site <strong>Marhaba </strong>vous présente plus de 20 adresses de qualité.</h4>
+            <h4>Des restaurants Italien, Espagnol, Français, Asiatique, Turc et bien sûr Marocain</h4>
+            <h4> <strong> VITE </strong> Faite une réservation dans l'un des restaurants qu'on vous présente, on vous attend.</h4>
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row" style="padding: 100px 0;">
+        <div class="column" style="border-width: 8px; border-style: outset; border-color: #faebeb; ">
+            <section>
+                <div>
+                    <br />
+                    <h2 class="card-title" style="text-align:center"><strong> @item.Nom_restaurant </strong></h2>
+                    <h3 class="card-title, text-center">
+                        @for (int i = 0; i < @item.Nombre_etoile ; i++)
+                        {
+                            <span class="glyphicon glyphicon-star" style="color:orange;"></span>
+                        }
+                        @for (int i = @item.Nombre_etoile; i < 5; i++)
+                        {
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        }
+                    </h3>
+                    <br /><br />
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img class="img-fluid, center-block" width="220" style="border-radius:5%;" src="https://recettechirurgicale.org/wp-content/uploads/2020/10/IL-288.jpg">
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text" style="text-align:center">
+                                    <br /> <br />
+                                           <h5>@item.Description</h5>
+                                    <br />
+                                    <h5 class="text-center">
+                                        <strong><i class="fas fa-map-marker-alt fa-lg"></i> </strong> @item.Adresse_restaurant &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;
+                                        <strong><i class="fas fa-phone-volume fa-lg"></i></strong> @item.Telephone
+                                    </h5>
+                                </p>
+                                <div class="title text-center" style="padding: 50px 0;">
+                                    <button class="btn btn-default">@Html.ActionLink("Voir plus", "Details" + @item.Id_restaurant, "RESTAURANTs")</button> &nbsp; &nbsp; &nbsp;
+                                    <button class="btn btn-default">@Html.ActionLink("Reserver", "Index", "RESERVATIONs")</button>
+                                </div>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <img class="img-fluid, center-block" width="200" style="border-radius:5%;" src="https://feastandfarm.com/wp-content/uploads/Medsteakpasta1.jpg.webp">
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+}

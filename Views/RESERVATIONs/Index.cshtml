@@ -1,0 +1,72 @@
+﻿@model IEnumerable<GestionRestaurant.Models.RESERVATION>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<br />
+<div class="text-center">
+    <h1 class="text-center"><strong> RÉSERVER UNE TABLE </strong></h1><br />
+</div>
+
+<br />
+<br />
+<div class="row">
+    <div class="column">
+
+        <section>
+
+            <div class="row" style="border-width: 5px; border-style: ridge; border-color: #faebeb; ">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <br /><br /><br />
+                            <img class="img-fluid, center-block" width="500" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTd8fHJlc3RhdXJhbnR8ZW58MHx8MHx8&w=1000&q=80">
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+
+                            @*partie 1*@
+
+                            <p class="card-text" style="text-align:center">
+                                <br /><br /><br /><br />
+                                <h5> <i class="fad fa-users fa-lg"></i> &nbsp; &nbsp;Nombre de personnes :</h5>
+                            <p class="card-text" style="text-align:center">
+                                <input type="number" class="datepicker-here form-control" data-language="en" id="dp" data-date-format="dd M yyyy">
+                            </p>
+                            <br />
+                            @*partie 2*@
+
+                            <h5> <i class="fad fa-clock fa-lg"></i> &nbsp; &nbsp;Date de reservation :</h5>
+                            <p class="card-text" style="text-align:center">
+                                <input type="date" class="datepicker-here form-control" data-language="en" id="dp" data-date-format="dd M yyyy">
+                            </p>
+                            <br />
+                            @*partie 3*@
+                            <p class="card-text" style="text-align:center">
+
+                                <h5> <i class="fal fa-address-card fa-lg"></i> &nbsp; &nbsp;Nom de reservation :</h5>
+                            <p class="card-text" style="text-align:center">
+                                <input type="text" class="datepicker-here form-control" data-language="en" id="dp" data-date-format="dd M yyyy">
+                            </p>
+
+
+
+                        </div>
+                    </div>
+                    <div class="center" style="text-align:center; padding: 50px 0;">
+                    </div>
+                </div>
+                <div class="center" style="text-align:center; padding: 30px 0;">
+                    <button class="btn btn-default">@Html.ActionLink("Valider", "Create", "RESERVATIONs")</button> &nbsp; &nbsp; &nbsp; &nbsp;
+                    <button class="btn btn-default">@Html.ActionLink("Liste des restaurant", "Page", "Home")</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

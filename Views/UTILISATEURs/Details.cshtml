@@ -1,0 +1,58 @@
+﻿@model GestionRestaurant.Models.UTILISATEUR
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>UTILISATEUR</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_utilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prenom_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prenom_utilisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresse_mail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adresse_mail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mot_de_passe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mot_de_passe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type_utilisateur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_utilisateur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

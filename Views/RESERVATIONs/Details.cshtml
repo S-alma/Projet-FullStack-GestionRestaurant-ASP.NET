@@ -1,0 +1,42 @@
+﻿@model GestionRestaurant.Models.RESERVATION
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RESERVATION</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_reservation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_reservation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TABLE_RESTAURANT.Id_table)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TABLE_RESTAURANT.Id_table)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UTILISATEUR.Nom_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UTILISATEUR.Nom_utilisateur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_reservation }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

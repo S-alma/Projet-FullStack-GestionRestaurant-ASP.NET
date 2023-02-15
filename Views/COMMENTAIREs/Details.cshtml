@@ -1,0 +1,58 @@
+﻿@model GestionRestaurant.Models.COMMENTAIRE
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>COMMENTAIRE</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Type_commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type_commentaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_commentaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_commentaire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commentaire1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commentaire1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RESTAURANT.Nom_restaurant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RESTAURANT.Nom_restaurant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UTILISATEUR.Nom_utilisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UTILISATEUR.Nom_utilisateur)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_commentaire }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

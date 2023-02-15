@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_Gestion_restaurantModelStoreContainer" CdmEntityContainer="BD_Gestion_restaurantEntities">
+    <EntitySetMapping Name="COMMENTAIREs">
+      <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.COMMENTAIRE">
+        <MappingFragment StoreEntitySet="COMMENTAIRE">
+          <ScalarProperty Name="Id_commentaire" ColumnName="Id_commentaire" />
+          <ScalarProperty Name="Type_commentaire" ColumnName="Type_commentaire" />
+          <ScalarProperty Name="Date_commentaire" ColumnName="Date_commentaire" />
+          <ScalarProperty Name="Commentaire1" ColumnName="Commentaire" />
+          <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+          <ScalarProperty Name="Id_restaurant" ColumnName="Id_restaurant" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESERVATIONs">
+      <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.RESERVATION">
+        <MappingFragment StoreEntitySet="RESERVATION">
+          <ScalarProperty Name="Id_reservation" ColumnName="Id_reservation" />
+          <ScalarProperty Name="Date_reservation" ColumnName="Date_reservation" />
+          <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+          <ScalarProperty Name="Id_table" ColumnName="Id_table" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESTAURANTs">
+      <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.RESTAURANT">
+        <MappingFragment StoreEntitySet="RESTAURANT">
+          <ScalarProperty Name="Id_restaurant" ColumnName="Id_restaurant" />
+          <ScalarProperty Name="Nom_restaurant" ColumnName="Nom_restaurant" />
+          <ScalarProperty Name="Adresse_restaurant" ColumnName="Adresse_restaurant" />
+          <ScalarProperty Name="Nombre_etoile" ColumnName="Nombre_etoile" />
+          <ScalarProperty Name="Nombre_table" ColumnName="Nombre_table" />
+          <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+          <ScalarProperty Name="Image_restaurant" ColumnName="Image_restaurant" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TABLE_RESTAURANT">
+      <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.TABLE_RESTAURANT">
+        <MappingFragment StoreEntitySet="TABLE_RESTAURANT">
+          <ScalarProperty Name="Id_table" ColumnName="Id_table" />
+          <ScalarProperty Name="Disponibilite" ColumnName="Disponibilite" />
+          <ScalarProperty Name="Nombre_personne" ColumnName="Nombre_personne" />
+          <ScalarProperty Name="Id_restaurant" ColumnName="Id_restaurant" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UTILISATEURs">
+      <EntityTypeMapping TypeName="BD_Gestion_restaurantModel.UTILISATEUR">
+        <MappingFragment StoreEntitySet="UTILISATEUR">
+          <ScalarProperty Name="Id_utilisateur" ColumnName="Id_utilisateur" />
+          <ScalarProperty Name="Nom_utilisateur" ColumnName="Nom_utilisateur" />
+          <ScalarProperty Name="Prenom_utilisateur" ColumnName="Prenom_utilisateur" />
+          <ScalarProperty Name="Adresse_mail" ColumnName="Adresse_mail" />
+          <ScalarProperty Name="Mot_de_passe" ColumnName="Mot_de_passe" />
+          <ScalarProperty Name="Type_utilisateur" ColumnName="Type_utilisateur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
